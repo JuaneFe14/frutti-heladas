@@ -23,7 +23,6 @@ const btnCrearCliente = document.getElementById("btnCrearCliente");
             clientes.push(querySnapshot.docs[i].data())
         }
     });
-
     btnFactura.classList.add("disabled");
 })()
 
@@ -32,7 +31,7 @@ function getById() {
     if (searchCliente) {
         alert("El cliente ya existe");
         btnFactura.classList.remove("disabled");
-        location.href = "/public/factura.html";
+        location.href = "/public/factura.html"
         return;
     } else {
         nombre.focus();

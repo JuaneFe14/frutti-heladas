@@ -7,7 +7,6 @@
     <title>Cliente</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <script src="js/navigation/navigation.js"></script>
 </head>
 
 <body>
@@ -17,7 +16,7 @@
             <form>
                 <div class="form-group">
                     <label>
-                        <input type="text" id="documento" placeholder="digite el documento">
+                        <input type="text" id="documento" onchange="getById()" placeholder="digite el documento">
                     </label>
                     <a href="#" class="btn btn-primary" onclick="getById()">Buscar</a>
                 </div>
