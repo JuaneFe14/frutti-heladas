@@ -1,91 +1,9 @@
-//#region atributos
-const ref = db.collection("factura");
-const facturas = [];
+// #region atributos
+const ref = db.collection('factura') // referencia a la coleccion (tabla)
+const facturas = [] // array para almacenar los datos de la coleccion
 
-const documento = document.getElementById("documento");
-const nombre = document.getElementById("nombre");
-const apellido = document.getElementById("apellido");
-const correo = document.getElementById("correo");
-const fechaNacimiento = document.getElementById("fechaNacimiento");
+// atributos del formulario para el DOM
 
-const btnFactura = document.getElementById("btnFactura");
-const btnCrearCliente = document.getElementById("btnCrearCliente");
+// botones de accion del formulario
 
-//#endregion
-
-
-(() => {
-    ref.get().then((querySnapshot) => {
-        if (querySnapshot.empty) {
-            console.log("No hay datos");
-        }
-        for (let i = 0; i < querySnapshot.docs.length; i++) {
-            facturas.push(querySnapshot.docs[i].data())
-        }
-    });
-
-    btnFactura.classList.add("disabled");
-})()
-
-function getById() {
-    const searchCliente = facturas.find((cliente) => cliente.documento === documento.value.trim())
-    if (searchCliente) {
-        alert("El cliente ya existe");
-        btnFactura.classList.remove("disabled");
-        location.href = "/public/factura.html";
-        return;
-    } else {
-        nombre.focus();
-    }
-}
-
-
-
-function create() {
-
-    if (documento.value.trim() === "" || nombre.value.trim() === "" || apellido.value().trim === "" || correo.value.trim() === "" || fechaNacimiento.value.trim() === "") {
-        documento.focus();
-        return;
-    }
-
-    // Add a second document with a generated ID.
-    ref.add({
-        documento: `${documento.value.trim()}`,
-        nombre: `${nombre.value.trim()}`,
-        apellido: `${apellido.value.trim()}`,
-        correo: `${correo.value.trim()}`,
-        fechaNacimiento: `${fechaNacimiento.value.trim()}`
-    })
-        .then((docRef) => {
-            console.log("Document written with ID: ", docRef.id);
-        })
-        .catch((error) => {
-            console.error("Error adding document: ", error);
-            documento.focus();
-        });
-}
-
-function update() {
-    const searchCliente = facturas.find((cliente) => cliente.documento === documento.value.trim())
-    if (searchCliente) {
-        if (documento.value.trim() === "" || nombre.value.trim() === "" || apellido.value.trim() === "" || correo.value.trim() === "" || fechaNacimiento.value.trim() === "") {
-            documento.focus();
-            return;
-        }
-
-        ref.doc(`${id}`).update({
-            documento: `${documento.value.trim()}`,
-            nombre: `${nombre.value.trim()}`,
-            apellido: `${apellido.value.trim()}`,
-            correo: `${correo.value.trim()}`,
-            fechaNacimiento: `${fechaNacimiento.value.trim()}`
-        })
-            .then(() => {
-                console.log("Document successfully updated!");
-            })
-            .catch((error) => {
-                console.error("Error updating document: ", error);
-                documento.focus();
-            });
-    }
-}
+// #endregion
