@@ -13,6 +13,14 @@ const fechaNacimiento = document.getElementById('fechaNacimiento');
 const btnFactura = document.getElementById('btnFactura');
 const btnCrearCliente = document.getElementById('btnCrearCliente');
 
+const cliente = {
+    documento: cliente.documento.trim(),
+    nombre: cliente.nombre.trim(),
+    apellido: cliente.apellido.trim(),
+    correo: cliente.correo.trim(),
+    fechaNacimiento: cliente.fechaNacimiento.trim()
+};
+
 // #endregion
 
 //#region funciones
@@ -35,14 +43,14 @@ const clienteByDocument = (documento) => clientes.find((cliente) => cliente.docu
 
 // obtener un unico dato de la coleccion previa con un metodo de un array
 function getById() {
-    const searchCliente = clienteByDocument(documento.value.trim());
+    const searchCliente = clienteByDocument(cliente.documento.trim());
     if (searchCliente) {
         //mapear los datos en el formulario
-        documento.value = searchCliente.documento
-        nombre.value = searchCliente.nombre
-        apellido.value = searchCliente.apellido
-        correo.value = searchCliente.correo
-        fechaNacimiento.value = searchCliente.fechaNacimiento
+        cliente.documento = searchCliente.documento
+        cliente.nombre = searchCliente.nombre
+        cliente.apellido = searchCliente.apellido
+        cliente.correo = searchCliente.correo
+        cliente.fechaNacimiento = searchCliente.fechaNacimiento
 
         btnFactura.classList.remove('disabled');
         btnFactura.focus();
@@ -54,18 +62,18 @@ function getById() {
 
 // crear un nuevo documento en la coleccion
 function create() {
-    if (documento.value.trim() === '' || nombre.value.trim() === '' || apellido.value.trim === '' || correo.value.trim() === '' || fechaNacimiento.value.trim() === '') {
+    if (cliente.documento.trim() === '' || cliente.nombre.trim() === '' || cliente.apellido.trim === '' || cliente.correo.trim() === '' || cliente.fechaNacimiento.trim() === '') {
         documento.focus();
         return;
     }
 
     // Add a second document with a generated ID.
     ref.add({
-        documento: `${documento.value.trim()}`,
-        nombre: `${nombre.value.trim()}`,
-        apellido: `${apellido.value.trim()}`,
-        correo: `${correo.value.trim()}`,
-        fechaNacimiento: `${fechaNacimiento.value.trim()}`
+        documento: `${cliente.documento.trim()}`,
+        nombre: `${cliente.nombre.trim()}`,
+        apellido: `${cliente.apellido.trim()}`,
+        correo: `${cliente.correo.trim()}`,
+        fechaNacimiento: `${cliente.fechaNacimiento.trim()}`
     })
         .then((docRef) => {
             console.log('Document written with ID: ', docRef.id);
@@ -79,17 +87,17 @@ function create() {
 
 // actualizar un documento en la coleccion
 function update() {
-    if (documento.value.trim() === '' || nombre.value.trim() === '' || apellido.value.trim() === '' || correo.value.trim() === '' || fechaNacimiento.value.trim() === '') {
+    if (cliente.documento.trim() === '' || cliente.nombre.trim() === '' || cliente.apellido.trim() === '' || cliente.correo.trim() === '' || cliente.fechaNacimiento.trim() === '') {
         documento.focus();
         return;
     }
 
     ref.doc(`${searchCliente.id}`).update({
-        documento: `${documento.value.trim()}`,
-        nombre: `${nombre.value.trim()}`,
-        apellido: `${apellido.value.trim()}`,
-        correo: `${correo.value.trim()}`,
-        fechaNacimiento: `${fechaNacimiento.value.trim()}`
+        documento: `${cliente.documento.trim()}`,
+        nombre: `${cliente.nombre.trim()}`,
+        apellido: `${cliente.apellido.trim()}`,
+        correo: `${cliente.correo.trim()}`,
+        fechaNacimiento: `${cliente.fechaNacimiento.trim()}`
     })
         .then(() => {
             console.log('Document successfully updated!');
@@ -104,7 +112,7 @@ function update() {
 
 //#region eventos
 btnCrearCliente.addEventListener('click', () => {
-    const searchCliente = clienteByDocument(documento.value.trim());
+    const searchCliente = clienteByDocument(cliente.documento.trim());
     if (searchCliente) {
         update();
     } else {
