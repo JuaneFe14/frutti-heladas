@@ -12,15 +12,6 @@ const fechaNacimiento = document.getElementById('fechaNacimiento');
 // botones de accion del formulario
 const btnFactura = document.getElementById('btnFactura');
 const btnCrearCliente = document.getElementById('btnCrearCliente');
-
-const cliente = {
-    documento: cliente.documento.trim(),
-    nombre: cliente.nombre.trim(),
-    apellido: cliente.apellido.trim(),
-    correo: cliente.correo.trim(),
-    fechaNacimiento: cliente.fechaNacimiento.trim()
-};
-
 // #endregion
 
 //#region funciones
@@ -39,41 +30,50 @@ const cliente = {
 })();
 
 // buscar un cliente por su documento
-const clienteByDocument = (documento) => clientes.find((cliente) => cliente.documento === documento);
+const clienteByDocument = (documento) => clientes.find((client) => client.documento === documento);
 
 // obtener un unico dato de la coleccion previa con un metodo de un array
 function getById() {
-    const searchCliente = clienteByDocument(cliente.documento.trim());
+    if (documento.value.trim() === '') {
+        documento.focus();
+        return;
+    }
+
+    const searchCliente = clienteByDocument(documento.value.trim());
+
     if (searchCliente) {
+        console.log(searchCliente);
+
         //mapear los datos en el formulario
-        cliente.documento = searchCliente.documento
-        cliente.nombre = searchCliente.nombre
-        cliente.apellido = searchCliente.apellido
-        cliente.correo = searchCliente.correo
-        cliente.fechaNacimiento = searchCliente.fechaNacimiento
+        documento.value = searchCliente.documento
+        nombre.value = searchCliente.nombre
+        apellido.value = searchCliente.apellido
+        correo.value = searchCliente.correo
+        fechaNacimiento.value = searchCliente.fechaNacimiento
 
         btnFactura.classList.remove('disabled');
         btnFactura.focus();
         // location.href = '/factura.html'
     } else {
+        console.log(searchCliente);
         nombre.focus();
     }
 }
 
 // crear un nuevo documento en la coleccion
 function create() {
-    if (cliente.documento.trim() === '' || cliente.nombre.trim() === '' || cliente.apellido.trim === '' || cliente.correo.trim() === '' || cliente.fechaNacimiento.trim() === '') {
+    if (documento.value.trim().trim() === '' || nombre.value.trim() === '' || apellido.value.trim() === '' || correo.value.trim() === '' || fechaNacimiento.value.trim() === '') {
         documento.focus();
         return;
     }
 
     // Add a second document with a generated ID.
     ref.add({
-        documento: `${cliente.documento.trim()}`,
-        nombre: `${cliente.nombre.trim()}`,
-        apellido: `${cliente.apellido.trim()}`,
-        correo: `${cliente.correo.trim()}`,
-        fechaNacimiento: `${cliente.fechaNacimiento.trim()}`
+        documento: `${documento.value.trim()}`,
+        nombre: `${nombre.value.trim()}`,
+        apellido: `${apellido.value.trim()}`,
+        correo: `${correo.value.trim()}`,
+        fechaNacimiento: `${fechaNacimiento.value.trim()}`
     })
         .then((docRef) => {
             console.log('Document written with ID: ', docRef.id);
@@ -87,17 +87,17 @@ function create() {
 
 // actualizar un documento en la coleccion
 function update() {
-    if (cliente.documento.trim() === '' || cliente.nombre.trim() === '' || cliente.apellido.trim() === '' || cliente.correo.trim() === '' || cliente.fechaNacimiento.trim() === '') {
+    if (documento.value.trim().trim() === '' || nombre.value.trim() === '' || apellido.value.trim() === '' || correo.value.trim() === '' || fechaNacimiento.value.trim() === '') {
         documento.focus();
         return;
     }
 
     ref.doc(`${searchCliente.id}`).update({
-        documento: `${cliente.documento.trim()}`,
-        nombre: `${cliente.nombre.trim()}`,
-        apellido: `${cliente.apellido.trim()}`,
-        correo: `${cliente.correo.trim()}`,
-        fechaNacimiento: `${cliente.fechaNacimiento.trim()}`
+        documento: `${documento.value.trim()}`,
+        nombre: `${nombre.value.trim()}`,
+        apellido: `${apellido.value.trim()()}`,
+        correo: `${correo.value.trim()}`,
+        fechaNacimiento: `${fechaNacimiento.value.trim()}`
     })
         .then(() => {
             console.log('Document successfully updated!');
@@ -112,7 +112,7 @@ function update() {
 
 //#region eventos
 btnCrearCliente.addEventListener('click', () => {
-    const searchCliente = clienteByDocument(cliente.documento.trim());
+    const searchCliente = clienteByDocument(documento.value.trim());
     if (searchCliente) {
         update();
     } else {
