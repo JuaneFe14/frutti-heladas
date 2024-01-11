@@ -2,3 +2,44 @@ body {
     margin: 0;
     padding: 0;
 }
+
+section {
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+article {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+
+}
+
+form {
+    min-width: 414px;
+    max-width: 500px;
+}
+
+fieldset {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+}
+
+legend {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ccc;
+}
