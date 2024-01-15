@@ -14,48 +14,67 @@ const btnFactura = document.getElementById('btnFactura');
 const btnCrearCliente = document.getElementById('btnCrearCliente');
 // #endregion
 
+//#region tabla
+const tbody = document.getElementById('tbody');
+//#endregion
+
 //#region funciones
 
-// Obtener los datos completos de una coleccion (tabla)
-(() => {
-    ref.get().then((querySnapshot) => {
-        if (querySnapshot.empty) {
-            console.log('No hay datos');
-        }
-        for (let i = 0; i < querySnapshot.docs.length; i++) {
-            clientes.push(querySnapshot.docs[i].data());
-        }
-    });
-    btnFactura.classList.add('disabled');
-})();
+(
+    async () => {
+        await ref.get().then((querySnapshot) => {
+            if (querySnapshot.empty) {
+                console.log('No hay datos');
+            }
+            for (let i = 0; i < querySnapshot.docs.length; i++) {
+                clientes.push(querySnapshot.docs[i].data());
+            }
+        });
 
+        if (clientes.length > 0) {
+            cargarTabla();
+        }
+    }
+)();
+
+const cargarTabla = () => {
+    clientes.forEach((cliente) => {
+        tbody.innerHTML += `
+            <tr>
+                <td>${cliente.documento}</td>
+                <td>${cliente.nombre}</td>
+                <td>${cliente.apellido}</td>
+                <td>${cliente.correo}</td>
+                <td>${cliente.fechaNacimiento}</td>
+            </tr>
+        `;
+    })
+}
 // buscar un cliente por su documento
 const clienteByDocument = (documento) => clientes.find((client) => client.documento === documento);
 
 // obtener un unico dato de la coleccion previa con un metodo de un array
-function getById() {
+async function getById() {
     if (documento.value.trim() === '') {
         documento.focus();
         return;
     }
 
     const searchCliente = clienteByDocument(documento.value.trim());
+    const client = await searchCliente;
 
-    if (searchCliente) {
-        console.log(searchCliente);
-
+    if (client) {
         //mapear los datos en el formulario
-        documento.value = searchCliente.documento
-        nombre.value = searchCliente.nombre
-        apellido.value = searchCliente.apellido
-        correo.value = searchCliente.correo
-        fechaNacimiento.value = searchCliente.fechaNacimiento
+        documento.value = client.documento
+        nombre.value = client.nombre
+        apellido.value = client.apellido
+        correo.value = client.correo
+        fechaNacimiento.value = client.fechaNacimiento
 
-        btnFactura.classList.remove('disabled');
         btnFactura.focus();
         // location.href = '/factura.html'
     } else {
-        console.log(searchCliente);
+        console.error('No se encontro el cliente');
         nombre.focus();
     }
 }
@@ -86,13 +105,13 @@ function create() {
 }
 
 // actualizar un documento en la coleccion
-function update() {
+function update(id) {
     if (documento.value.trim().trim() === '' || nombre.value.trim() === '' || apellido.value.trim() === '' || correo.value.trim() === '' || fechaNacimiento.value.trim() === '') {
         documento.focus();
         return;
     }
 
-    ref.doc(`${searchCliente.id}`).update({
+    ref.doc(`${id}`).update({
         documento: `${documento.value.trim()}`,
         nombre: `${nombre.value.trim()}`,
         apellido: `${apellido.value.trim()()}`,
@@ -110,11 +129,11 @@ function update() {
 }
 //#endregion
 
-//#region eventos
+// #region eventos
 btnCrearCliente.addEventListener('click', () => {
     const searchCliente = clienteByDocument(documento.value.trim());
     if (searchCliente) {
-        update();
+        update(searchCliente.id);
     } else {
         create();
     }
