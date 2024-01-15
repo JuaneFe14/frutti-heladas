@@ -1,6 +1,6 @@
 // #region atributos
-const ref = db.collection('cliente') // referencia a la coleccion (tabla)
-const clientes = [] // array para almacenar los datos de la coleccion
+const ref = db.collection('cliente'); // referencia a la coleccion (tabla)
+const clientes = []; // array para almacenar los datos de la coleccion
 
 // atributos del formulario para el DOM
 const documento = document.getElementById('documento');
@@ -49,7 +49,7 @@ const cargarTabla = () => {
             </tr>
         `;
     })
-}
+};
 // buscar un cliente por su documento
 const clienteByDocument = (documento) => clientes.find((client) => client.documento === documento);
 
@@ -77,7 +77,7 @@ async function getById() {
         console.error('No se encontro el cliente');
         nombre.focus();
     }
-}
+};
 
 // crear un nuevo documento en la coleccion
 function create() {
@@ -102,7 +102,7 @@ function create() {
             console.error('Error adding document: ', error);
             documento.focus();
         });
-}
+};
 
 // actualizar un documento en la coleccion
 function update(id) {
@@ -126,7 +126,7 @@ function update(id) {
             console.error('Error updating document: ', error);
             documento.focus();
         })
-}
+};
 //#endregion
 
 // #region eventos
@@ -137,5 +137,5 @@ btnCrearCliente.addEventListener('click', () => {
     } else {
         create();
     }
-})
+});
 //#endregion
