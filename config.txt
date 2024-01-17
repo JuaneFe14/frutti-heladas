@@ -23,7 +23,8 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit"
     },
-    "eslint.alwaysShowStatus": true,
+    "eslint.format.enable": true,
+    "eslint.codeActionsOnSave.mode": "problems",
     "notebook.formatOnSave.enabled": true,
     "errorLens.onSave": true,
     "rapidapi.terminalLink.enabled": false,
@@ -36,13 +37,11 @@
     "oneDarkPro.italic": true,
     "oneDarkPro.vivid": true,
     "workbench.preferredDarkColorTheme": "Bluloco Dark Italic",
-    "workbench.preferredLightColorTheme": "Bluloco Dark Italic",
     "editor.fontSize": 13,
     "editor.letterSpacing": 1.2,
-    "workbench.preferredHighContrastColorTheme": "Bluloco Dark Italic",
-    "workbench.preferredHighContrastLightColorTheme": "Bluloco Dark Italic",
-    "workbench.colorTheme": "Bluloco Dark Italic",
     "git.autofetch": true,
     "window.titleBarStyle": "custom",
-    "telemetry.telemetryLevel": "off"
+    "telemetry.telemetryLevel": "off",
+    "workbench.colorTheme": "Bluloco Dark Italic",
+    "window.zoomLevel": 1,
 }
