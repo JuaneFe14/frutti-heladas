@@ -10,10 +10,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "standard": "^17.1.0"
+    "standard": "17.1.0"
   },
   "dependencies": {
-    "firebase": "^10.7.1"
+    "firebase": "10.7.1"
   },
   "eslintConfig": {
     "extends": "./node_modules/standard/eslintrc.json"
