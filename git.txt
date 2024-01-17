@@ -1,0 +1,39 @@
+comandos de git & github
+
+git clone {link} => clonar un repositorio
+
+git branch => mostrar las ramas
+
+Si estas en la rama develop solamente usas: git branch feature/{username}/{fecha}/#{numbercard}
+
+git branch -m {rama en la que estoy } {nueva rama} => crea otra rama
+
+git checkout {nombre} => cambiar de rama
+
+git status => mirar que cambios hay
+
+git add . => agregar todos los cambios
+
+git commit -m "{mensaje}" => agregar un mensaje para saber que cambios hice
+
+git push origin {nombre rama} => subir los cambios a la nube (github)
+
+in github:
+
+compare and pull request
+
+add description especified what change completed
+
+assign people (jfelipeq14)
+
+create pull
+
+__________________________________________________
+
+git fetch origin develop => revisar si hay cambios
+
+git pull origin develop => obtener los cambios
+
+when complete git pull: create new branch with name feature/{username}/{fecha}/#{number assigned}
+
+replay process
