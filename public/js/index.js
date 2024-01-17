@@ -1,22 +1,17 @@
-// #region atributos
-const ref = db.collection('productos'); // referencia a la coleccion (tabla)
-const productos = []; // array para almacenar los datos de la coleccion
-//#endregion
+// TODO: Replace the following with your app's Firebase project configuration
+// See: https://support.google.com/firebase/answer/7015592
+const firebaseConfig = {
+    apiKey: "AIzaSyAgZPJLrrmAvWmgXv7ZqzbzjucEHtsnp-A",
+    authDomain: "frutti-heladas-e0b11.firebaseapp.com",
+    projectId: "frutti-heladas-e0b11",
+    storageBucket: "frutti-heladas-e0b11.appspot.com",
+    messagingSenderId: "268325432838",
+    appId: "1:268325432838:web:26d896cd98f2eb28c11d87"
+};
 
-//#region funciones
-(
-    async () => {
-        await ref.get().then((querySnapshot) => {
-            if (querySnapshot.empty) {
-                console.log('No hay datos');
-            }
-            for (let i = 0; i < querySnapshot.docs.length; i++) {
-                productos.push(querySnapshot.docs[i].data());
-            }
-        });
-    }
-)();
-//#endregion
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
-// #region eventos
-//#endregion
+
+// Initialize Cloud Firestore and get a reference to the service
+const db = firebase.firestore();
